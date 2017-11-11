@@ -12,6 +12,7 @@ namespace Notes.Data.EfCore
         {
             _dbContext = dbContext;
         }
+        
         public Task Create(Domain.Dto.Note note)
         {
             var toAdd = DbModel.Note.From(note);

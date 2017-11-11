@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Notes.Domain.Dto;
 using Notes.Domain.Port.Out;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Notes.Data.EfCore
 {
     public class NoteQueryRepository : INoteQueryRepository
     {
-        public Task<IEnumerable<Note>> Get()
+        private readonly NotesContext _dbContext;
+
+        public NoteQueryRepository(NotesContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<Note> Get(Guid id)
+        public async Task<IEnumerable<Domain.Dto.Note>> Get()
         {
-            throw new NotImplementedException();
+            var notes = await _dbContext.Notes.ToArrayAsync();
+            return notes.Select(n => DbModel.Note.To(n));
+        }
+
+        public async Task<Domain.Dto.Note> Get(Guid id)
+        {
+            var note = await _dbContext.Notes.FindAsync(id);
+            return note == null ? null : DbModel.Note.To(note);
         }
     }
 }
