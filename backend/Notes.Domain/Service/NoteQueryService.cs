@@ -5,7 +5,7 @@ using System.Linq;
 using Notes.Domain.Port.In;
 using Notes.Domain.Port.Out;
 
-namespace Notes.Domain.Adapter
+namespace Notes.Domain.Service
 {
     public class NoteQueryService : INoteQueryService
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Notes.Domain.Dto;
 using Notes.Domain.Port.In;
 using Notes.Domain.Port.Out;
-using Notes.Domain.Adapter;
+using Notes.Domain.Service;
 
 namespace Notes.Domain.Test
 {
