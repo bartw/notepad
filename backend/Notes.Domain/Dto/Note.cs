@@ -1,6 +1,6 @@
 using System;
 
-namespace Notes.Contracts
+namespace Notes.Domain.Dto
 {
     public class Note
     {

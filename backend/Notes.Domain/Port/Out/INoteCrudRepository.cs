@@ -1,13 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using Notes.Contracts;
 
-namespace Notes.Domain
+namespace Notes.Domain.Port.Out
 {
     public interface INoteCrudRepository
     {
-        Task Create(Contracts.Note note);
-        Task Update(Contracts.Note note);
+        Task Create(Dto.Note note);
+        Task Update(Dto.Note note);
         Task Delete(Guid id);
     }
 }

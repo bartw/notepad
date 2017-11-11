@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Notes.Contracts;
 using System.Linq;
+using Notes.Domain.Port.In;
+using Notes.Domain.Port.Out;
 
-namespace Notes.Domain
+namespace Notes.Domain.Adapter
 {
     public class NoteQueryService : INoteQueryService
     {
@@ -15,13 +16,13 @@ namespace Notes.Domain
             _noteQueryRepository = noteQueryRepository;
         }
 
-        public async Task<IEnumerable<Contracts.Note>> Get()
+        public async Task<IEnumerable<Dto.Note>> Get()
         {
             var notes = await _noteQueryRepository.Get();
             return notes;
         }
 
-        public async Task<Contracts.Note> Get(Guid id)
+        public async Task<Dto.Note> Get(Guid id)
         {
             var note = await _noteQueryRepository.Get(id);
             return note;

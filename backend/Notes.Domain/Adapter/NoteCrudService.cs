@@ -1,8 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Notes.Contracts;
+using Notes.Domain.Port.In;
+using Notes.Domain.Port.Out;
 
-namespace Notes.Domain
+namespace Notes.Domain.Adapter
 {
     public class NoteCrudService : INoteCrudService
     {
@@ -13,14 +14,14 @@ namespace Notes.Domain
             _noteCrudRepository = noteCrudRepository;
         }
         
-        public async Task<Guid> Create(CreateRequest createRequest)
+        public async Task<Guid> Create(Dto.CreateRequest createRequest)
         {
-            var note = Note.From(createRequest);
-            await _noteCrudRepository.Create(Mapper.Map(note));
+            var note = Entity.Note.From(createRequest);
+            await _noteCrudRepository.Create(Entity.Note.To(note));
             return note.Id;
         }
 
-        public Task Update(Contracts.Note note)
+        public Task Update(Dto.Note note)
         {
             if (note == null)
             {

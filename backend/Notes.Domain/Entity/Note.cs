@@ -1,7 +1,7 @@
 using System;
-using Notes.Contracts;
+using Notes.Domain.Dto;
 
-namespace Notes.Domain
+namespace Notes.Domain.Entity
 {
     internal class Note
     {
@@ -23,6 +23,11 @@ namespace Notes.Domain
         public static Note From(CreateRequest createRequest)
         {
             return new Note(createRequest.Title, createRequest.Content);
+        }
+
+        public static Dto.Note To(Note note)
+        {
+            return note == null ? null : new Dto.Note(note.Id, note.Title, note.Content);
         }
     }
 }

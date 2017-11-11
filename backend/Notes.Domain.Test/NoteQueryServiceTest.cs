@@ -1,10 +1,13 @@
 using System;
 using Xunit;
 using NSubstitute;
-using Notes.Contracts;
 using Notes.Domain;
+using Notes.Domain.Dto;
 using FluentAssertions;
 using System.Threading.Tasks;
+using Notes.Domain.Port.In;
+using Notes.Domain.Port.Out;
+using Notes.Domain.Adapter;
 
 namespace Notes.Domain.Test
 {
@@ -27,7 +30,7 @@ namespace Notes.Domain.Test
             var notes = await sut.Get();
 
             await _noteQueryRepository.Received(1).Get();
-            notes.ShouldBeEquivalentTo(new[] { new Contracts.Note(id, "title", "content") });
+            notes.ShouldBeEquivalentTo(new[] { new Note(id, "title", "content") });
         }
 
         [Fact]
@@ -53,7 +56,7 @@ namespace Notes.Domain.Test
             var note = await sut.Get(existingId);
             
             await _noteQueryRepository.Received(1).Get(existingId);
-            note.ShouldBeEquivalentTo(new Contracts.Note(existingId, "title", "content"));
+            note.ShouldBeEquivalentTo(new Note(existingId, "title", "content"));
         }
 
         private INoteQueryService GetSut()

@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Notes.Domain\Notes.Domain.csproj" />
-    <ProjectReference Include="..\Notes.Contracts\Notes.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />

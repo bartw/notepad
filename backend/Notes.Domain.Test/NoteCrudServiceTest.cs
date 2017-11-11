@@ -1,11 +1,13 @@
 using System;
 using Xunit;
 using NSubstitute;
-using Notes.Contracts;
 using Notes.Domain;
 using FluentAssertions;
 using System.Threading.Tasks;
-using Notes.Contracts;
+using Notes.Domain.Dto;
+using Notes.Domain.Port.In;
+using Notes.Domain.Port.Out;
+using Notes.Domain.Adapter;
 
 namespace Notes.Domain.Test
 {
@@ -26,7 +28,7 @@ namespace Notes.Domain.Test
             var sut = GetSut();
             var id = await sut.Create(createRequest);
 
-            await _noteCrudRepository.Received(1).Create(Arg.Is<Contracts.Note>(n => n.Title == "title" && n.Content == "content"));
+            await _noteCrudRepository.Received(1).Create(Arg.Is<Note>(n => n.Title == "title" && n.Content == "content"));
             id.Should().NotBeEmpty();
         }
 
@@ -43,12 +45,12 @@ namespace Notes.Domain.Test
         public async Task GivenANote_WhenUpdate_ThenTheNoteIsUpdated()
         {
             var id = Guid.NewGuid();
-            var note = new Contracts.Note(id, "title", "content");
+            var note = new Note(id, "title", "content");
 
             var sut = GetSut();
             await sut.Update(note);
             
-            await _noteCrudRepository.Received(1).Update(Arg.Is<Contracts.Note>(n => n.Id == id && n.Title == "title" && n.Content == "content"));
+            await _noteCrudRepository.Received(1).Update(Arg.Is<Note>(n => n.Id == id && n.Title == "title" && n.Content == "content"));
         }
 
         [Fact]
