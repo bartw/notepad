@@ -1,9 +1,10 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Notes.Domain
 {
     public interface INoteCrudRepository
     {
-        Guid Create(Note note);
+        Task Create(Note note);
     }
 }

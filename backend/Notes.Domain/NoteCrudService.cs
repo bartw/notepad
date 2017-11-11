@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Notes.Contracts;
 
 namespace Notes.Domain
@@ -11,9 +12,12 @@ namespace Notes.Domain
         {
             _noteCrudRepository = noteCrudRepository;
         }
-        public Guid Create(CreateRequest createRequest)
+        
+        public async Task<Guid> Create(CreateRequest createRequest)
         {
-            return _noteCrudRepository.Create(new Note(createRequest.Title, createRequest.Content));
+            var note = new Note(createRequest.Title, createRequest.Content);
+            await _noteCrudRepository.Create(note);
+            return note.Id;
         }
     }
 }

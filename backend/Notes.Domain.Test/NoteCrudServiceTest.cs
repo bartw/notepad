@@ -4,6 +4,7 @@ using NSubstitute;
 using Notes.Contracts;
 using Notes.Domain;
 using FluentAssertions;
+using System.Threading.Tasks;
 
 namespace Notes.Domain.Test
 {
@@ -17,17 +18,15 @@ namespace Notes.Domain.Test
         }
 
         [Fact]
-        public void GivenACreateRequest_WhenCreate_ThenANoteIsCreatedAndTheGeneratedIdIsReturned()
+        public async Task GivenACreateRequest_WhenCreate_ThenANoteIsCreatedAndTheGeneratedIdIsReturned()
         {
-            var createdId = Guid.NewGuid();
             var createRequest = new CreateRequest("title", "content");
-            
-            _noteCrudRepository.Create(Arg.Is<Note>(n => n.Title == "title" && n.Content == "content")).Returns(createdId);
 
             var sut = GetSut();
-            var id = sut.Create(createRequest);
+            var id = await sut.Create(createRequest);
 
-            id.Should().Be(createdId);
+            await _noteCrudRepository.Received(1).Create(Arg.Is<Note>(n => n.Title == "title" && n.Content == "content"));
+            id.Should().NotBeEmpty();
         }
 
         private INoteCrudService GetSut()

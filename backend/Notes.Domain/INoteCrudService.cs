@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Notes.Contracts;
 
 namespace Notes.Domain
 {
     public interface INoteCrudService
     {
-        Guid Create(CreateRequest createRequest);
+        Task<Guid> Create(CreateRequest createRequest);
     }
 }
