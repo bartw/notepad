@@ -8,5 +8,6 @@ namespace Notes.Domain
     {
         Task<Guid> Create(CreateRequest createRequest);
         Task Update(Contracts.Note note);
+        Task Delete(Guid id);
     }
 }

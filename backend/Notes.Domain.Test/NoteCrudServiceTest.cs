@@ -50,6 +50,15 @@ namespace Notes.Domain.Test
             await _noteCrudRepository.Received(1).Update(Arg.Is<Note>(n => n.Id == id && n.Title == "title" && n.Content == "content"));
         }
 
+        [Fact]
+        public async Task GivenAnId_WhenDelete_ThenTheNoteIsDeleted()
+        {
+            var sut = GetSut();
+            await sut.Delete(Guid.Empty);
+
+            await _noteCrudRepository.Received(1).Delete(Guid.Empty);
+        }
+
         private INoteCrudService GetSut()
         {
             return new NoteCrudService(_noteCrudRepository);

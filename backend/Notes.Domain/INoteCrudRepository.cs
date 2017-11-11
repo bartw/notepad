@@ -7,5 +7,6 @@ namespace Notes.Domain
     {
         Task Create(Note note);
         Task Update(Note note);
+        Task Delete(Guid id);
     }
 }

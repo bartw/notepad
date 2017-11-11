@@ -28,5 +28,10 @@ namespace Notes.Domain
             }
             return _noteCrudRepository.Update(Mapper.Map(note));
         }
+
+        public Task Delete(Guid id)
+        {
+            return _noteCrudRepository.Delete(id);
+        }
     }
 }
