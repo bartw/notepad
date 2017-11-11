@@ -3,7 +3,7 @@ using Notes.Contracts;
 
 namespace Notes.Domain
 {
-    public class Note
+    internal class Note
     {
         public Guid Id { get; }
         public string Title { get; }

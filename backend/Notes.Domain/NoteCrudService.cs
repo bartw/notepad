@@ -16,7 +16,7 @@ namespace Notes.Domain
         public async Task<Guid> Create(CreateRequest createRequest)
         {
             var note = Note.From(createRequest);
-            await _noteCrudRepository.Create(note);
+            await _noteCrudRepository.Create(Mapper.Map(note));
             return note.Id;
         }
 
@@ -26,7 +26,7 @@ namespace Notes.Domain
             {
                 throw new ArgumentNullException();
             }
-            return _noteCrudRepository.Update(Mapper.Map(note));
+            return _noteCrudRepository.Update(note);
         }
 
         public Task Delete(Guid id)
