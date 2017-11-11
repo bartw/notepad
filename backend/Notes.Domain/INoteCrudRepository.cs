@@ -6,5 +6,6 @@ namespace Notes.Domain
     public interface INoteCrudRepository
     {
         Task Create(Note note);
+        Task Update(Note note);
     }
 }

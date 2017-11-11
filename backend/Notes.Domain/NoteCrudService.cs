@@ -19,5 +19,14 @@ namespace Notes.Domain
             await _noteCrudRepository.Create(note);
             return note.Id;
         }
+
+        public Task Update(Contracts.Note note)
+        {
+            if (note == null)
+            {
+                throw new ArgumentNullException();
+            }
+            return _noteCrudRepository.Update(Mapper.Map(note));
+        }
     }
 }

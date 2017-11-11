@@ -9,5 +9,10 @@ namespace Notes.Domain
         {
             return note == null ? null : new Contracts.Note(note.Id, note.Title, note.Content);
         }
+
+        public static Note Map(Contracts.Note note)
+        {
+            return note == null ? null : new Note(note.Id, note.Title, note.Content);
+        }
     }
 }

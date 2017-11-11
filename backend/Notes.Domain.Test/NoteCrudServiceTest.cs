@@ -29,6 +29,27 @@ namespace Notes.Domain.Test
             id.Should().NotBeEmpty();
         }
 
+        [Fact]
+        public void GivenNull_WhenUpdate_ThenAnExceptionIsThrown()
+        {
+            var sut = GetSut();
+            Func<Task> update = async () => await sut.Update(null);
+            
+            update.ShouldThrow<ArgumentNullException>();
+        }
+
+        [Fact]
+        public async Task GivenANote_WhenUpdate_ThenTheNoteIsUpdated()
+        {
+            var id = Guid.NewGuid();
+            var note = new Contracts.Note(id, "title", "content");
+
+            var sut = GetSut();
+            await sut.Update(note);
+            
+            await _noteCrudRepository.Received(1).Update(Arg.Is<Note>(n => n.Id == id && n.Title == "title" && n.Content == "content"));
+        }
+
         private INoteCrudService GetSut()
         {
             return new NoteCrudService(_noteCrudRepository);

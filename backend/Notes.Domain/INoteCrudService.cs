@@ -7,5 +7,6 @@ namespace Notes.Domain
     public interface INoteCrudService
     {
         Task<Guid> Create(CreateRequest createRequest);
+        Task Update(Contracts.Note note);
     }
 }
