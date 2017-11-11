@@ -30,6 +30,32 @@ namespace Notes.Domain.Test
             notes.ShouldBeEquivalentTo(new[] { new Contracts.Note(id, "title", "content") });
         }
 
+        [Fact]
+        public async Task GivenAnIdThatDoesNotExist_WhenGet_ThenNullIsReturned()
+        {
+            var idThatDoesNotExist = Guid.Empty;
+            _noteQueryRepository.Get(idThatDoesNotExist).Returns(Task.FromResult<Note>(null));
+
+            var sut = GetSut();
+            var note = await sut.Get(idThatDoesNotExist);
+            
+            await _noteQueryRepository.Received(1).Get(idThatDoesNotExist);
+            note.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task GivenAnExistingId_WhenGet_ThenTheNoteIsReturned()
+        {
+            var existingId = Guid.NewGuid();
+            _noteQueryRepository.Get(existingId).Returns(new Note(existingId, "title", "content"));
+
+            var sut = GetSut();
+            var note = await sut.Get(existingId);
+            
+            await _noteQueryRepository.Received(1).Get(existingId);
+            note.ShouldBeEquivalentTo(new Contracts.Note(existingId, "title", "content"));
+        }
+
         private INoteQueryService GetSut()
         {
             return new NoteQueryService(_noteQueryRepository);

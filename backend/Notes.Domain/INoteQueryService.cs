@@ -8,5 +8,6 @@ namespace Notes.Domain
     public interface INoteQueryService
     {
         Task<IEnumerable<Contracts.Note>> Get();
+        Task<Contracts.Note> Get(Guid id);
     }
 }
