@@ -18,13 +18,13 @@ namespace Notes.Domain
         public async Task<IEnumerable<Contracts.Note>> Get()
         {
             var notes = await _noteQueryRepository.Get();
-            return notes.Select(n => new Contracts.Note(n.Id, n.Title, n.Content));
+            return notes.Select(n => Mapper.Map(n));
         }
 
         public async Task<Contracts.Note> Get(Guid id)
         {
             var note = await _noteQueryRepository.Get(id);
-            return note == null ? null : new Contracts.Note(note.Id, note.Title, note.Content);
+            return Mapper.Map(note);
         }
     }
 }

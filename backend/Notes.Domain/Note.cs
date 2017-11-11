@@ -1,4 +1,5 @@
 using System;
+using Notes.Contracts;
 
 namespace Notes.Domain
 {
@@ -17,6 +18,11 @@ namespace Notes.Domain
             Id = id;
             Title = title;
             Content = content;
+        }
+
+        public static Note From(CreateRequest createRequest)
+        {
+            return new Note(createRequest.Title, createRequest.Content);
         }
     }
 }

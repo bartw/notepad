@@ -15,7 +15,7 @@ namespace Notes.Domain
         
         public async Task<Guid> Create(CreateRequest createRequest)
         {
-            var note = new Note(createRequest.Title, createRequest.Content);
+            var note = Note.From(createRequest);
             await _noteCrudRepository.Create(note);
             return note.Id;
         }
