@@ -19,14 +19,33 @@ namespace Notes.Data.EfCore
             return _dbContext.SaveChangesAsync();
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var toRemove = await FindOrException(id);
+
+            _dbContext.Remove(toRemove);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task Update(Domain.Dto.Note note)
+        public async Task Update(Domain.Dto.Note note)
         {
-            throw new NotImplementedException();
+            var toUpdate = await FindOrException(note.Id);
+
+            toUpdate.Title = note.Title;
+            toUpdate.Content = note.Content;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private async Task<DbModel.Note> FindOrException(Guid id)
+        {
+            var note = await _dbContext.Notes.FindAsync(id);
+
+            if (note == null)
+            {
+                throw new Exception($"Note with id {id} could not be found.");
+            }
+
+            return note;
         }
     }
 }
