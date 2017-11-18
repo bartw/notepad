@@ -27,9 +27,15 @@ namespace Notes.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<Note> Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return _noteQueryService.Get(id);
+            var note = await _noteQueryService.Get(id);
+            
+            if (note == null) {
+                return NotFound();
+            }
+
+            return Ok(note);
         }
 
         [HttpPost]
