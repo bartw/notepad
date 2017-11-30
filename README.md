@@ -12,6 +12,10 @@ dotnet msbuild watch.proj /t:Test
 
 remove dangling images on windows:
 FOR /f "tokens=*" %i IN ('docker images -q -f "dangling=true"') DO docker rmi %i
+docker image prune
+
+docker build -t notepad .
+docker run -it --rm --name notepad -p 8000:80 notepad
 
 ## License
 
