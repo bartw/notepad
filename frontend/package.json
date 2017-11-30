@@ -6,7 +6,8 @@
   "scripts": {
     "build:debug": "webpack",
     "build:watch": "webpack --watch",
-    "build": "webpack -p --config webpack.production.config.js"
+    "build": "webpack -p --config webpack.production.config.js",
+    "build:docker": "webpack --config webpack.docker.config.js --watch"
   },
   "repository": {
     "type": "git",
