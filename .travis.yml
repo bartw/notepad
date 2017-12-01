@@ -1,0 +1,12 @@
+language: csharp
+mono: none
+dotnet: 1.0.3
+dist: trusty
+install:
+  - dotnet restore Notes.Data.EfCore.Test/
+  - dotnet restore Notes.Domain.Test/
+  - dotnet restore Notes.Web.Test/
+script:
+  - dotnet test Notes.Data.EfCore.Test/Notes.Data.EfCore.Test.csproj
+  - dotnet test Notes.Domain.Test/Notes.Domain.Test.csproj
+  - dotnet test Notes.Web.Test/Notes.Web.Test.csproj
