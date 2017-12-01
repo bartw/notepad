@@ -3,10 +3,10 @@ mono: none
 dotnet: 2.0.3
 dist: trusty
 install:
-  - dotnet restore Notes.Data.EfCore.Test/
-  - dotnet restore Notes.Domain.Test/
-  - dotnet restore Notes.Web.Test/
+  - dotnet restore backend/Notes.Data.EfCore.Test/
+  - dotnet restore backend/Notes.Domain.Test/
+  - dotnet restore backend/Notes.Web.Test/
 script:
-  - dotnet test Notes.Data.EfCore.Test/Notes.Data.EfCore.Test.csproj
-  - dotnet test Notes.Domain.Test/Notes.Domain.Test.csproj
-  - dotnet test Notes.Web.Test/Notes.Web.Test.csproj
+  - dotnet test backend/Notes.Data.EfCore.Test/Notes.Data.EfCore.Test.csproj
+  - dotnet test backend/Notes.Domain.Test/Notes.Domain.Test.csproj
+  - dotnet test backend/Notes.Web.Test/Notes.Web.Test.csproj
