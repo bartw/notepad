@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bartw/notepad.svg?branch=master)](https://travis-ci.org/bartw/notepad)
+
 # Notepad
 
 docker build -t notepad-frontend .
