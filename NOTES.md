@@ -12,6 +12,8 @@ remove dangling images on windows:
 FOR /f "tokens=*" %i IN ('docker images -q -f "dangling=true"') DO docker rmi %i
 docker image prune
 
+https://stackoverflow.com/a/42608990
+
 ```shell
 docker run -it --rm -v C:\Users\bartw\Documents\repos\notepad\:/travis ruby /bin/bash
 gem install travis
