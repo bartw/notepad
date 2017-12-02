@@ -23,3 +23,6 @@ heroku auth:token
 cd travis
 travis encrypt "DOCKER_USERNAME=super_\\\$$ecret" --add env.global
 ```
+
+docker build -t notepad-dev -f Dev.Dockerfile .
+docker run -it --rm --name notepad-dev -p 5001:5001 -v C:\Users\bartw\Documents\repos\notepad\backend:/app notepad-dev
