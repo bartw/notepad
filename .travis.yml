@@ -2,8 +2,7 @@ language: csharp
 mono: none
 dotnet: 2.0.3
 dist: trusty
-sudo: required
-service:
+services:
 - docker
 install:
 - dotnet restore backend/Notes.Data.EfCore.Test/
