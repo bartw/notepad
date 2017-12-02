@@ -2,22 +2,17 @@
 
 # Notepad
 
-docker build -t notepad-frontend .
-docker run -it --rm -v C:\Users\bartw\Documents\repos\notepad\frontend\src:/app/src -v C:\Users\bartw\Documents\repos\notepad\frontend\dist:/app/dist notepad-frontend
+## Running notepad locally
 
-docker build -t notepad-backend-test .
-docker run -it --rm --name notepad-backend-test -v C:\Users\bartw\Documents\repos\notepad\backend:/app notepad-backend-test
+Make sure you have [docker](https://www.docker.com/) and a nice terminal.
+Open a terminal and execute the following commands:
 
-docker run -it --rm -v C:\Users\bartw\Documents\repos\notepad\backend:/app -e DOTNET_USE_POLLING_FILE_WATCHER=1 microsoft/dotnet:sdk
-dotnet restore watch.proj
-dotnet msbuild watch.proj /t:Test
-
-remove dangling images on windows:
-FOR /f "tokens=*" %i IN ('docker images -q -f "dangling=true"') DO docker rmi %i
-docker image prune
-
+```shell
 docker build -t notepad .
-docker run -it --rm --name notepad -p 8000:80 notepad
+docker run -it --rm --name notepad -p 5001:5001 notepad
+```
+
+Now browse to http://localhost:5001/ and you should see the app running.
 
 ## License
 

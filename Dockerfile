@@ -15,6 +15,7 @@ COPY --from=frontend-build /frontend/dist wwwroot
 RUN dotnet publish -c Release
 
 FROM microsoft/aspnetcore
+ENV PORT="5001"
 WORKDIR /app
-COPY --from=backend-build  /backend/Notes.Web/bin/Release/netcoreapp2.0/publish .
-ENTRYPOINT ["dotnet", "Notes.Web.dll"]
+COPY --from=backend-build /backend/Notes.Web/bin/Release/netcoreapp2.0/publish .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Notes.Web.dll
