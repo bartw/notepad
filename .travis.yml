@@ -4,6 +4,10 @@ dotnet: 2.0.3
 dist: trusty
 services:
 - docker
+addons:
+  apt:
+    packages:
+      - docker-ce
 install:
 - dotnet restore backend/Notes.Data.EfCore.Test/
 - dotnet restore backend/Notes.Domain.Test/
