@@ -19,5 +19,5 @@ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 heroku login
 heroku auth:token
 cd travis
-travis encrypt DOCKER_USERNAME='super_$ecret' --add env.global
+travis encrypt "DOCKER_USERNAME=super_\\\$$ecret" --add env.global
 ```
