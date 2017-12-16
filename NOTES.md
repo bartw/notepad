@@ -8,8 +8,6 @@ docker run -it --rm -v C:\Users\bartw\Documents\repos\notepad\backend:/app -e DO
 dotnet restore watch.proj
 dotnet msbuild watch.proj /t:Test
 
-remove dangling images on windows:
-FOR /f "tokens=*" %i IN ('docker images -q -f "dangling=true"') DO docker rmi %i
 docker image prune
 
 https://stackoverflow.com/a/42608990
@@ -24,5 +22,5 @@ cd travis
 travis encrypt "DOCKER_USERNAME=super_\\\$$ecret" --add env.global
 ```
 
-docker build -t notepad-dev -f Dev.Dockerfile .
-docker run -it --rm --name notepad-dev -p 5001:5001 -v C:\Users\bartw\Documents\repos\notepad\backend:/app notepad-dev
+docker build -t notepad -f Dockerfile .
+docker run -it --rm --name notepad -p 5001:5001 -v C:\Users\bartw\Documents\repos\notepad\backend:/app notepad
